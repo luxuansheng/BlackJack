@@ -74,10 +74,10 @@ int showcards(int card)
     num = card % 13 + 1;
     switch(color)                       // Make outputs by different cases
     {
-        case 0 : cout << "hearts"; break;
-        case 1 : cout << "spade" ; break;
-        case 2 : cout << "diamand";break;
-        case 3 : cout << "club"   ;break;
+        case 0 : cout << "hearts" <<" "; break;
+        case 1 : cout << "spade" << " "; break;
+        case 2 : cout << "diamand"<< " ";break;
+        case 3 : cout << "club" << " "   ;break;
     }
     switch (num)
     {
@@ -201,7 +201,7 @@ char input()
         if(strlen(flag) > 1)
         {   cout << "Your input is wrong!" << endl;
             continue;}
-        if(flag[0] == 'Y' || flag[0] == 'N') break;
+        if(flag[0] == 'Y' || flag[0] == 'y' || flag[0] == 'N' || flag[0] == 'n') break;
         try
         {
             throw(flag);
