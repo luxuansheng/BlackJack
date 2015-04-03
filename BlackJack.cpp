@@ -5,22 +5,21 @@
 using namespace std;
 int  givecards();   //To originate cards.
 int  showcards(int); //To show the cards on screen
-int  deciding_time();//To let users make decisions.
-int  operating_time();// To let computer make decision.
+int  player_turn();//To let users make decisions.
+int  computer_turn(int);// To let computer make decision.
 double  numchange(int); // To change sepcial cards.e.g. JQK
 char input();           // To judge inputs.
 bool  judging(char);
-extern double playernum = 0,computernum = 0;// The sum of all cards
-extern int    playercards = 2, computercards = 2;//The number of cards gotten
-extern int playercard[12] ={0};     // To save cards
-extern int computercard[12]={0};    // To save cards
+static double playernum = 0,computernum = 0;// The sum of all cards
+static int playercard[12] ={0};     // To save cards
+static int computercard[12]={0};    // To save cards
 
 
 
 int main()
 {
 
-    int  num,color,card,i,j;
+    int  num,color,card,playercards,i,j;
     bool flag  = true;
     char choice;
     srand(time(NULL));
@@ -34,11 +33,10 @@ int main()
             num = numchange(num);
             playernum += num;
         }
-        choice = deciding_time();
-        choice = operating_time();
+        playercards = player_turn();
+        choice = computer_turn(playercards);
         flag = judging(choice);
-        playernum = 0, playercards = 2;         // Initializing extern variables.
-        computernum = 0, computercards = 2;
+        playernum = 0, computernum = 0;
         for (i = 0;i < 12; i++ )
         playercard[i] = computercard[i] = 0;
     }
@@ -92,14 +90,14 @@ int showcards(int card)
 }
 
 
-int deciding_time()
+int player_turn()
 {
     char dec;
     int card,num,i,j;
     char choice;
     cout << "Need cards?(Y/N)" << endl;
     dec = input();
-    while(dec == 'Y')
+    while(dec == 'Y' || dec == 'y')
     {
         cout << "You get one more card.The cards are:" << endl;
         for (i = 1; i < 12;i++)
@@ -111,17 +109,17 @@ int deciding_time()
         {num = showcards(playercard[j]);}
         num = numchange(num);
         playernum += num;
-        playercards++;
         if (playernum > 21) break;
         cout << "Need cards?(Y/N)" << endl;
         dec = input();
     }
     if (playernum > 21 )
     {cout << "you lose." << endl;}
+    else return i;
 }
 
 
-int operating_time()
+int computer_turn(int playercards)
 {
     int  color,num,card,i,j;
     char choice;
@@ -147,7 +145,6 @@ int operating_time()
             {num = showcards(computercard[j]);}
             num = numchange(num);
             computernum += num;
-            computercards++;
             cout << endl;
         }
         if (computernum > playernum && computernum <= 21)       // The judge of who wins.
@@ -156,11 +153,11 @@ int operating_time()
             cout << "You win!" << endl;
         if (computernum == 21 && playernum == 21)
         {
-            if(computercards < playercards)
+            if(i < playercards)
                 cout << "You win!" << endl;
-            if (computercards > playercards)
+            if (i > playercards)
                 cout << "You lose." << endl;
-            if (computercards == playercards)
+            if (i == playercards)
                 cout << "Dual" <<endl;
         }
     }
