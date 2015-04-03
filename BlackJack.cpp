@@ -9,7 +9,6 @@ int  player_turn();//To let users make decisions.
 int  computer_turn(int);// To let computer make decision.
 double  numchange(int); // To change sepcial cards.e.g. JQK
 char input();           // To judge inputs.
-bool  judging(char);
 static double playernum = 0,computernum = 0;// The sum of all cards
 static int playercard[12] ={0};     // To save cards
 static int computercard[12]={0};    // To save cards
@@ -20,10 +19,9 @@ int main()
 {
 
     int  num,color,card,playercards,i,j;
-    bool flag  = true;
-    char choice;
+    char choice ='Y';
     srand(time(NULL));
-    while(flag == true)
+    while(choice == 'Y' || choice == 'y')
     {
         cout << "You get two cards,they are:" << endl;
         for (i = 0;i < 2; i++)
@@ -35,7 +33,6 @@ int main()
         }
         playercards = player_turn();
         choice = computer_turn(playercards);
-        flag = judging(choice);
         playernum = 0, computernum = 0;
         for (i = 0;i < 12; i++ )
         playercard[i] = computercard[i] = 0;
@@ -178,15 +175,6 @@ double numchange(int num)
         default : changednum = num;break;
     }
     return changednum;
-}
-
-
-bool judging(char choice)
-{
-    if (choice == 'Y' || choice == 'y')
-    return true;
-    if (choice == 'N')
-    return false;
 }
 
 char input()
