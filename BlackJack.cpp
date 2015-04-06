@@ -111,7 +111,10 @@ int player_turn()
         dec = input();
     }
     if (playernum > 21 )
-    {cout << "you lose." << endl;}
+    {
+        cout << "you lose." << endl;
+        return 0;
+    }
     else return i;
 }
 
