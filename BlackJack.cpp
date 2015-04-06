@@ -28,8 +28,7 @@ int main()
         {
             playercard[i] = givecards();
             num = showcards (playercard[i]);
-            num = numchange(num);
-            playernum += num;
+            playernum += numchange(num);
         }
         playercards = player_turn();
         choice = computer_turn(playercards);
@@ -104,8 +103,7 @@ int player_turn()
         }
         for(j = 0; j <= i; j++)
         {num = showcards(playercard[j]);}
-        num = numchange(num);
-        playernum += num;
+        playernum += numchange(num);
         if (playernum > 21) break;
         cout << "Need cards?(Y/N)" << endl;
         dec = input();
@@ -130,8 +128,7 @@ int computer_turn(int playercards)
         {
             computercard[i] = givecards ();
             num = showcards (computercard[i]);
-            num = numchange(num);
-            computernum += num;
+            computernum += numchange(num);
         }
         while(computernum <= playernum && computernum < 21)
         {
@@ -143,8 +140,7 @@ int computer_turn(int playercards)
             }
             for(j = 0; j <= i; j++)
             {num = showcards(computercard[j]);}
-            num = numchange(num);
-            computernum += num;
+            computernum += numchange(num);
             cout << endl;
         }
         if (computernum > playernum && computernum <= 21)       // The judge of who wins.
@@ -169,7 +165,7 @@ int computer_turn(int playercards)
 
 double numchange(int num)
 {
-    int changednum;
+    double changednum;
     switch(num)
     {
         case 11 :
